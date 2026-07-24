@@ -166,6 +166,20 @@ class Session:
         self.trace_id = trace_id
         self._step = 0
 
+    @property
+    def current_step(self) -> int:
+        """The step index the next :meth:`tool_call` / :meth:`llm_call` will assign."""
+        return self._step
+
+    def _stamp_replay(self, span: trace.Span) -> None:
+        """Copy the replay tags onto a child span so cost/latency/divergence
+        panels can filter a whole replay by ``rewind.replay_of`` (which would
+        otherwise live only on the root session span)."""
+        if self._rec._replay_of:
+            span.set_attribute(c.REWIND_REPLAY_OF, self._rec._replay_of)
+        if self._rec._replay_run is not None:
+            span.set_attribute(c.REWIND_REPLAY_RUN, self._rec._replay_run)
+
     def _next_step(self) -> int:
         s = self._step
         self._step += 1
@@ -192,6 +206,7 @@ class Session:
         start = time.monotonic()
         with self._rec.tracer.start_as_current_span(f"chat {model}") as span:
             span.set_attribute(c.REWIND_SESSION_ID, self.session_id)
+            self._stamp_replay(span)
             span.set_attribute(c.REWIND_STEP_INDEX, step)
             span.set_attribute(c.REWIND_STEP_KIND, c.STEP_KIND_LLM)
             span.set_attribute(c.GEN_AI_OPERATION_NAME, c.OP_CHAT)
@@ -232,6 +247,7 @@ class Session:
         start = time.monotonic()
         with self._rec.tracer.start_as_current_span(f"execute_tool {name}") as span:
             span.set_attribute(c.REWIND_SESSION_ID, self.session_id)
+            self._stamp_replay(span)
             span.set_attribute(c.REWIND_STEP_INDEX, step)
             span.set_attribute(c.REWIND_STEP_KIND, c.STEP_KIND_TOOL)
             span.set_attribute(c.GEN_AI_OPERATION_NAME, c.OP_EXECUTE_TOOL)
@@ -247,13 +263,23 @@ class Session:
                     span.set_attribute(c.REWIND_TOOL_ERROR, handle.error)
                     span.set_status(Status(StatusCode.ERROR, handle.error))
                     self._rec._inst.tool_errors.add(1, {c.GEN_AI_TOOL_NAME: name})
+                if handle.divergence is not None:
+                    # Set by the replay ToolMocker when the replayed agent asks
+                    # for something that doesn't match what was recorded.
+                    span.set_attribute(c.REWIND_DIVERGENCE, True)
+                    span.set_attribute(c.REWIND_DIVERGENCE_KIND, handle.divergence)
                 span.set_attribute(c.REWIND_TOOL_RESPONSE, _json(handle.response))
                 self._rec._inst.tool_duration.record(dur_ms, {c.GEN_AI_TOOL_NAME: name})
 
 
 @dataclass
 class ToolSpan:
-    """Mutable handle a tool span fills in with its result."""
+    """Mutable handle a tool span fills in with its result.
+
+    ``divergence`` is set only during replay — one of the ``DIVERGENCE_*``
+    kinds in conventions.py when the replayed call doesn't match the recording.
+    """
 
     response: Any = None
     error: str | None = None
+    divergence: str | None = None

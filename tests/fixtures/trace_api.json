@@ -1,0 +1,173 @@
+[
+ {
+  "startTimestampMillis": 1784000000000,
+  "endTimestampMillis": 1784000002000,
+  "columns": [
+   "__time",
+   "SpanId",
+   "TraceId",
+   "ServiceName",
+   "Name",
+   "Kind",
+   "DurationNano",
+   "TagsKeys",
+   "TagsValues",
+   "References",
+   "Events",
+   "HasError",
+   "StatusMessage",
+   "StatusCodeString",
+   "SpanKind"
+  ],
+  "events": [
+   [
+    1784000000000,
+    "spanagen",
+    "traceFIX",
+    "support-agent",
+    "agent.session",
+    "1",
+    "1000000",
+    [
+     "rewind.session_id",
+     "rewind.user_query"
+    ],
+    [
+     "sess-fix",
+     "Where is ORD-1002?"
+    ],
+    [],
+    [],
+    false,
+    "",
+    "Unset",
+    "Internal"
+   ],
+   [
+    1784000000000,
+    "spanchat",
+    "traceFIX",
+    "support-agent",
+    "chat claude-opus-4-8",
+    "1",
+    "1000000",
+    [
+     "rewind.session_id",
+     "rewind.step_index",
+     "rewind.step_kind",
+     "gen_ai.operation.name",
+     "gen_ai.request.model",
+     "gen_ai.system_instructions",
+     "gen_ai.request.max_tokens"
+    ],
+    [
+     "sess-fix",
+     "0",
+     "llm",
+     "chat",
+     "claude-opus-4-8",
+     "You are support.",
+     "1024"
+    ],
+    [],
+    [],
+    false,
+    "",
+    "Unset",
+    "Internal"
+   ],
+   [
+    1784000000000,
+    "spanexec",
+    "traceFIX",
+    "support-agent",
+    "execute_tool lookup_order",
+    "1",
+    "1000000",
+    [
+     "rewind.step_index",
+     "rewind.step_kind",
+     "gen_ai.tool.name",
+     "rewind.tool.args",
+     "rewind.tool.response"
+    ],
+    [
+     "1",
+     "tool",
+     "lookup_order",
+     "{\"order_id\": \"ORD-1002\"}",
+     "{\"found\": true, \"item\": \"USB-C hub\", \"status\": \"shipped\"}"
+    ],
+    [],
+    [],
+    false,
+    "",
+    "Unset",
+    "Internal"
+   ],
+   [
+    1784000000000,
+    "spanexec",
+    "traceFIX",
+    "support-agent",
+    "execute_tool get_shipping_status",
+    "1",
+    "1000000",
+    [
+     "rewind.step_index",
+     "rewind.step_kind",
+     "gen_ai.tool.name",
+     "rewind.tool.args",
+     "rewind.tool.response",
+     "rewind.tool.error"
+    ],
+    [
+     "2",
+     "tool",
+     "get_shipping_status",
+     "{\"order_id\": \"ORD-1002\"}",
+     "{\"error\": \"JSONDecodeError: malformed\"}",
+     "JSONDecodeError: malformed"
+    ],
+    [],
+    [],
+    true,
+    "",
+    "Error",
+    "Internal"
+   ],
+   [
+    1784000000000,
+    "spanchat",
+    "traceFIX",
+    "support-agent",
+    "chat claude-opus-4-8",
+    "1",
+    "1000000",
+    [
+     "rewind.session_id",
+     "rewind.step_index",
+     "rewind.step_kind",
+     "gen_ai.operation.name",
+     "gen_ai.request.model",
+     "gen_ai.system_instructions"
+    ],
+    [
+     "sess-fix",
+     "3",
+     "llm",
+     "chat",
+     "claude-opus-4-8",
+     "You are support."
+    ],
+    [],
+    [],
+    false,
+    "",
+    "Unset",
+    "Internal"
+   ]
+  ],
+  "isSubTree": false
+ }
+]

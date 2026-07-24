@@ -35,5 +35,51 @@ def run(query: str, model: str = typer.Option(None, help="Override the model."))
     shutdown()
 
 
+@app.command()
+def replay(
+    trace_id: str,
+    model: str = typer.Option(None, help="Override the model for this replay."),
+    temperature: float = typer.Option(None, help="Override temperature (models that accept it)."),
+    prompt_file: str = typer.Option(None, help="Replace the system prompt (e.g. a hardened one)."),
+    source: str = typer.Option("api", help="Trace source: 'api' or 'clickhouse'."),
+) -> None:
+    """Replay a recorded incident: re-run the session with tools served from
+    the recording. Tools are deterministic; the LLM runs fresh."""
+    from rewind.recorder import shutdown
+    from rewind.replay import replay as do_replay
+
+    res = do_replay(
+        trace_id, model=model, temperature=temperature, prompt_file=prompt_file, source=source
+    )
+    r = res.recorded
+    console.print(
+        f"[dim]replaying {trace_id}  (run #{res.replay_run})  query: {r.user_query[:60]}[/dim]"
+    )
+    console.print(f"[dim]recorded: model={r.model} tools={[t.name for t in r.tools]}[/dim]")
+    matched = sum(1 for m in res.matches if m.status == "matched")
+    console.print(
+        f"\ntool calls: {len(res.matches)}  matched={matched}  "
+        f"divergences={len(res.divergences)}"
+    )
+    for m in res.divergences:
+        console.print(f"  [yellow]! {m.name} (call #{m.ordinal}): {m.status}[/yellow]")
+    console.print(f"\n[bold]replay answer:[/bold] {res.final_answer}")
+    console.print(f"\n[bold cyan]replay trace_id={res.trace_id}[/bold cyan] "
+                  f"[dim](rewind.replay_of={trace_id})[/dim]")
+    shutdown()
+
+
+@app.command()
+def diff(
+    original_id: str,
+    replay_id: str,
+    source: str = typer.Option("api", help="Trace source: 'api' or 'clickhouse'."),
+) -> None:
+    """Compare an incident trace against a replay, side by side."""
+    from rewind.diff import compute_diff, render_diff
+
+    render_diff(compute_diff(original_id, replay_id, source=source), console)
+
+
 if __name__ == "__main__":
     app()
