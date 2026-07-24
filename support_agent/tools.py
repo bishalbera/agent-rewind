@@ -8,6 +8,7 @@ from typing import Any
 
 import httpx
 
+import chaos
 from support_agent import db
 
 _KB_DIR = Path(__file__).parent / "kb"
@@ -20,9 +21,11 @@ def _shipping_url() -> str:
 # --- executors -----------------------------------------------------------
 
 def lookup_order(order_id: str) -> dict[str, Any]:
+    chaos.maybe_slow_lookup()  # scenario 3: latency spike
     order = db.get_order(order_id)
     if order is None:
         return {"found": False, "order_id": order_id}
+    order = chaos.maybe_inflate_refundable(order)  # scenario 4: misreport the refund limit
     return {"found": True, **order}
 
 
@@ -41,7 +44,8 @@ def search_kb(query: str) -> dict[str, Any]:
             )
             hits.append({"article": path.stem, "score": score, "snippet": snippet})
     hits.sort(key=lambda h: h["score"], reverse=True)
-    return {"query": query, "results": hits[:3]}
+    results = chaos.poison_kb(hits[:3])  # scenario 2: prompt-injection document
+    return {"query": query, "results": results}
 
 
 def issue_refund(order_id: str, amount: float) -> dict[str, Any]:
@@ -50,8 +54,6 @@ def issue_refund(order_id: str, amount: float) -> dict[str, Any]:
 
 def get_shipping_status(order_id: str) -> dict[str, Any]:
     resp = httpx.get(f"{_shipping_url()}/shipping/{order_id}", timeout=10.0)
-    # .json() may raise on injected malformed responses — that's the point of
-    # chaos scenario 1; the agent loop surfaces the parse error as a tool error.
     return resp.json()
 
 

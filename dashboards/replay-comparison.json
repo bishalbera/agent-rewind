@@ -1,0 +1,655 @@
+{
+  "title": "Rewind \u2014 Replay Comparison",
+  "description": "Incidents replayed as tests. Panels are filtered by rewind.replay_of; 'Divergences by tool' is the fix signal \u2014 where a replayed (e.g. hardened-prompt) agent departed from the recorded incident.",
+  "tags": [
+    "rewind",
+    "replay",
+    "agent"
+  ],
+  "layout": [
+    {
+      "h": 3,
+      "w": 4,
+      "x": 0,
+      "y": 0,
+      "i": "08557cfd-70b7-4e83-81f4-73bc078f962c",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 3,
+      "w": 4,
+      "x": 4,
+      "y": 0,
+      "i": "546dbe5a-c57f-486f-b19c-7310692291ce",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 3,
+      "w": 4,
+      "x": 8,
+      "y": 0,
+      "i": "134fc0dc-d687-47e3-b5a6-f0e05032d5f4",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 12,
+      "x": 0,
+      "y": 3,
+      "i": "5981c065-5711-4e0b-9e85-0a0d158e0fbd",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 8,
+      "i": "522e33fb-712f-434e-86f8-c21f57cf6fab",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 6,
+      "y": 8,
+      "i": "62264560-f419-4011-a981-0c7bf7f11710",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 13,
+      "i": "4dec4c5d-58eb-404d-be4c-d6e6a8265489",
+      "moved": false,
+      "static": false
+    }
+  ],
+  "widgets": [
+    {
+      "id": "08557cfd-70b7-4e83-81f4-73bc078f962c",
+      "title": "Replay sessions",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session' AND rewind.replay_of EXISTS"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "af886a5f-7c1e-4326-977c-8464a1982823",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "546dbe5a-c57f-486f-b19c-7310692291ce",
+      "title": "Divergences",
+      "description": "Tool calls on replay that didn't match the recording.",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "rewind.divergence = true"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "67b4568d-5697-4fef-b691-6c828ab4523d",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "134fc0dc-d687-47e3-b5a6-f0e05032d5f4",
+      "title": "Replay cost (USD)",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "sum(rewind.cost_usd)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat' AND rewind.replay_of EXISTS"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "c7d7d741-2338-4c35-86c1-eafa98a56816",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "5981c065-5711-4e0b-9e85-0a0d158e0fbd",
+      "title": "Replays by incident",
+      "description": "Each original incident (rewind.replay_of) and how many times it was replayed.",
+      "panelTypes": "table",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session' AND rewind.replay_of EXISTS"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "rewind.replay_of--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "rewind.replay_of",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{rewind.replay_of}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "e64803e7-1649-42b3-aaad-ddb4fc4c798f",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "522e33fb-712f-434e-86f8-c21f57cf6fab",
+      "title": "Divergences by tool",
+      "description": "Where replayed agents diverged from the recorded incident \u2014 the fix signal.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "rewind.divergence = true"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.tool.name--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.tool.name",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{gen_ai.tool.name}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "2bd29747-5d28-4fee-bbf1-4d6701e60ded",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "62264560-f419-4011-a981-0c7bf7f11710",
+      "title": "Replay cost by incident",
+      "description": "",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "sum(rewind.cost_usd)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat' AND rewind.replay_of EXISTS"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "rewind.replay_of--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "rewind.replay_of",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{rewind.replay_of}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "861bf6db-7903-4468-972d-7185579b1dd5",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "4dec4c5d-58eb-404d-be4c-d6e6a8265489",
+      "title": "Replay session latency p95",
+      "description": "",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "p95(duration_nano)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session' AND rewind.replay_of EXISTS"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "rewind.replay_of--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "rewind.replay_of",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{rewind.replay_of}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "bfb9ae8d-aca5-4eff-aa01-6d15c497db4a",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "ns",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    }
+  ],
+  "variables": {},
+  "panelMap": {},
+  "version": "v5",
+  "uploadedGrafana": false
+}

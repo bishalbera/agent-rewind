@@ -27,7 +27,6 @@ support-agent/**/*.db
 data/
 
 deploy/pours/
-deploy/casting.yaml.lock
 
 .DS_Store
 *.swp
