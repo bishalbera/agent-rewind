@@ -1,0 +1,1104 @@
+{
+  "title": "Rewind \u2014 Agent Ops",
+  "description": "Live operational health of the support agent: request rate, latency, token cost by model, and tool-failure rate. Built on OpenTelemetry GenAI spans plus rewind.* metrics.",
+  "tags": [
+    "rewind",
+    "agent",
+    "llm",
+    "genai"
+  ],
+  "layout": [
+    {
+      "h": 3,
+      "w": 3,
+      "x": 0,
+      "y": 0,
+      "i": "f467cacd-7d66-4153-b426-9afb9fae62a3",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 3,
+      "w": 3,
+      "x": 3,
+      "y": 0,
+      "i": "59021dc5-dfe8-4409-8236-3d117a67853e",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 3,
+      "w": 3,
+      "x": 6,
+      "y": 0,
+      "i": "e90fc951-d2f7-42d7-bb04-a455ed190496",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 3,
+      "w": 3,
+      "x": 9,
+      "y": 0,
+      "i": "196aa9d4-d4fb-462f-8246-c6a63d1b734f",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 3,
+      "i": "15ec6209-8e92-42a9-b52b-cef9c4d135b5",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 6,
+      "y": 3,
+      "i": "2a99c3e4-79fa-4d4f-a1a7-2f7a920cc130",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 8,
+      "i": "dee6637e-e47b-47ae-86ca-8bdf0cff5637",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 6,
+      "y": 8,
+      "i": "a0a218d2-d86d-47a7-92dc-017c4a66e548",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 13,
+      "i": "1d0b721a-1f1b-487f-95c5-7973698de6fc",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 6,
+      "y": 13,
+      "i": "6a9ba024-4056-42ca-b481-ad3abecb1e90",
+      "moved": false,
+      "static": false
+    },
+    {
+      "h": 5,
+      "w": 6,
+      "x": 0,
+      "y": 18,
+      "i": "b338cb49-c63c-4463-8d82-72bc5d0de992",
+      "moved": false,
+      "static": false
+    }
+  ],
+  "widgets": [
+    {
+      "id": "f467cacd-7d66-4153-b426-9afb9fae62a3",
+      "title": "Sessions",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "286a8cb5-cc09-43df-9355-d00a2ef922b9",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "59021dc5-dfe8-4409-8236-3d117a67853e",
+      "title": "LLM calls",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "ca8dc5ab-0fa7-442b-b59a-0d7f23b28d9b",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "e90fc951-d2f7-42d7-bb04-a455ed190496",
+      "title": "Total cost (USD)",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "sum(rewind.cost_usd)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "5a0b79fd-e1ae-4dd6-a571-c8b03f120d5a",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {
+        "A": "none"
+      },
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "196aa9d4-d4fb-462f-8246-c6a63d1b734f",
+      "title": "Tool errors",
+      "description": "",
+      "panelTypes": "value",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "metricName": "rewind.tool.errors",
+                  "reduceTo": "sum",
+                  "spaceAggregation": "sum",
+                  "temporality": "",
+                  "timeAggregation": "increase"
+                }
+              ],
+              "dataSource": "metrics",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": ""
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "7c23d91a-73d1-44ab-a8f7-1fc878b77297",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "15ec6209-8e92-42a9-b52b-cef9c4d135b5",
+      "title": "Session rate",
+      "description": "Support sessions over time (request rate).",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "sessions",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "99133e0e-562d-4ea7-9ecc-6a5451b38631",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "2a99c3e4-79fa-4d4f-a1a7-2f7a920cc130",
+      "title": "Session latency p50 / p95 / p99",
+      "description": "End-to-end session latency percentiles.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "p50(duration_nano)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "name = 'agent.session'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "p50",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            },
+            {
+              "aggregations": [
+                {
+                  "expression": "p95(duration_nano)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "B",
+              "filter": {
+                "expression": "name = 'agent.session'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "p95",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "B",
+              "source": "",
+              "stepInterval": null
+            },
+            {
+              "aggregations": [
+                {
+                  "expression": "p99(duration_nano)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "C",
+              "filter": {
+                "expression": "name = 'agent.session'"
+              },
+              "functions": [],
+              "groupBy": [],
+              "having": {
+                "expression": ""
+              },
+              "legend": "p99",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "C",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "7784099f-af1b-41ba-b60a-427eb705039f",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "ns",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "dee6637e-e47b-47ae-86ca-8bdf0cff5637",
+      "title": "Token cost by model (metric)",
+      "description": "Per-call cost metric, summed by model.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "metricName": "rewind.tokens.cost_usd",
+                  "reduceTo": "sum",
+                  "spaceAggregation": "sum",
+                  "temporality": "",
+                  "timeAggregation": "increase"
+                }
+              ],
+              "dataSource": "metrics",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": ""
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.request.model--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.request.model",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{gen_ai.request.model}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "04804303-fd5d-4606-bd25-e39e7f75bb36",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "a0a218d2-d86d-47a7-92dc-017c4a66e548",
+      "title": "Token usage by model",
+      "description": "Input/output tokens from span attributes.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "sum(gen_ai.usage.input_tokens)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat'"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.request.model--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.request.model",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "in {{gen_ai.request.model}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            },
+            {
+              "aggregations": [
+                {
+                  "expression": "sum(gen_ai.usage.output_tokens)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "B",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'chat'"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.request.model--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.request.model",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "out {{gen_ai.request.model}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "B",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "6070eda3-58d7-4ef1-b2b3-c3daa490baf2",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "1d0b721a-1f1b-487f-95c5-7973698de6fc",
+      "title": "Tool latency p95 by tool",
+      "description": "Per-tool latency; watch for the lookup_order timeout scenario.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "p95(duration_nano)"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'execute_tool'"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.tool.name--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.tool.name",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{gen_ai.tool.name}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "d28b9408-279e-4d05-acd4-c9df8026ce9d",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "ns",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "6a9ba024-4056-42ca-b481-ad3abecb1e90",
+      "title": "Tool call volume by tool",
+      "description": "",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "expression": "count()"
+                }
+              ],
+              "dataSource": "traces",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": "gen_ai.operation.name = 'execute_tool'"
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.tool.name--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.tool.name",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{gen_ai.tool.name}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "1700413a-7475-425c-b627-f8f689d6d837",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    },
+    {
+      "id": "b338cb49-c63c-4463-8d82-72bc5d0de992",
+      "title": "Tool-failure rate by tool (metric)",
+      "description": "Tool errors from the rewind.tool.errors counter.",
+      "panelTypes": "graph",
+      "query": {
+        "builder": {
+          "queryData": [
+            {
+              "aggregations": [
+                {
+                  "metricName": "rewind.tool.errors",
+                  "reduceTo": "sum",
+                  "spaceAggregation": "sum",
+                  "temporality": "",
+                  "timeAggregation": "increase"
+                }
+              ],
+              "dataSource": "metrics",
+              "disabled": false,
+              "expression": "A",
+              "filter": {
+                "expression": ""
+              },
+              "functions": [],
+              "groupBy": [
+                {
+                  "dataType": "string",
+                  "id": "gen_ai.tool.name--string--tag",
+                  "isColumn": false,
+                  "isJSON": false,
+                  "key": "gen_ai.tool.name",
+                  "type": "tag"
+                }
+              ],
+              "having": {
+                "expression": ""
+              },
+              "legend": "{{gen_ai.tool.name}}",
+              "limit": null,
+              "orderBy": [],
+              "queryName": "A",
+              "source": "",
+              "stepInterval": null
+            }
+          ],
+          "queryFormulas": [],
+          "queryTraceOperator": []
+        },
+        "clickhouse_sql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "id": "fd493dbb-55df-43c4-8f86-de34933e28e5",
+        "promql": [
+          {
+            "disabled": false,
+            "legend": "",
+            "name": "A",
+            "query": ""
+          }
+        ],
+        "queryType": "builder",
+        "unit": ""
+      },
+      "yAxisUnit": "none",
+      "bucketCount": 30,
+      "bucketWidth": 0,
+      "columnUnits": {},
+      "customLegendColors": {},
+      "decimalPrecision": null,
+      "fillSpans": false,
+      "isLogScale": false,
+      "isStacked": false,
+      "legendPosition": "bottom",
+      "mergeAllActiveQueries": false,
+      "nullZeroValues": "zero",
+      "opacity": "1",
+      "selectedLogFields": [],
+      "selectedTracesFields": [],
+      "softMax": 0,
+      "softMin": 0,
+      "stackedBarChart": false,
+      "thresholds": [],
+      "timePreferance": "GLOBAL"
+    }
+  ],
+  "variables": {},
+  "panelMap": {},
+  "version": "v5",
+  "uploadedGrafana": false
+}
